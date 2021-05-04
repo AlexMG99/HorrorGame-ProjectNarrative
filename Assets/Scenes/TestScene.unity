@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  acceleration: 0.6
+  acceleration: 2
   maxSpeed: 5
   camMovSpeed: 5
 --- !u!143 &1129758378
