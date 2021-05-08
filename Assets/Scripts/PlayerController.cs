@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 5.0f;
     public float camMovSpeed = 5.0f;
 
+    bool isRunning = false;
+
     CharacterController controller;
    
     void Awake()
@@ -21,6 +23,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Input
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            isRunning = true;
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+            isRunning = false;
+
+        // Player Movement
         PlayerMovement();
     }
 
@@ -38,7 +47,12 @@ public class PlayerController : MonoBehaviour
         move += Input.GetAxis("Vertical") * GameManager.Instance.GetVirtualCamera().transform.forward;
         move += Input.GetAxis("Horizontal") * GameManager.Instance.GetVirtualCamera().transform.right;
         move.y = 0.0f;
-        //move += Physics.gravity * 0.5f;
+
+        // Run
+        if(isRunning)
+            move *= 2;
+
+        move += Physics.gravity * 0.5f;
         controller.Move(move * Time.deltaTime * speed);
 
         Vector3 direction =  Vector3.Lerp(gameObject.transform.forward, GameManager.Instance.GetVirtualCamera().transform.forward, camMovSpeed * Time.deltaTime);
