@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,5 +22,11 @@ public class GameManager : MonoBehaviour
     public GameObject GetVirtualCamera()
     {
         return virtualCamera;
+    }
+
+    public void ChangeCameraOffset(Vector3 offset)
+    {
+        CinemachineTransposer cinTrans = virtualCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>();
+        cinTrans.m_FollowOffset = offset;
     }
 }

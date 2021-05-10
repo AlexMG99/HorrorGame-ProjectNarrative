@@ -12,12 +12,15 @@ public class PlayerController : MonoBehaviour
     public float camMovSpeed = 5.0f;
 
     bool isRunning = false;
+    bool isCrouched = false;
 
     CharacterController controller;
+    Animator animator;
    
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,8 +32,26 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
             isRunning = false;
 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isCrouched = true;
+            animator.SetBool("Crouched", isCrouched);
+
+            GameManager.Instance.ChangeCameraOffset(new Vector3(0, 0, 1.0f));
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            isCrouched = false;
+            animator.SetBool("Crouched", isCrouched);
+
+            GameManager.Instance.ChangeCameraOffset(new Vector3(0, 0, 0));
+        }
+
         // Player Movement
         PlayerMovement();
+
+        // Animations
+        animator.SetFloat("Speed", Input.GetAxis("Vertical"));
     }
 
     // Player Movement Input
@@ -40,7 +61,7 @@ public class PlayerController : MonoBehaviour
         if (speed < maxSpeed && (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))
             speed += acceleration * Time.deltaTime;
         else if(speed > 1.0 && Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)
-            speed -= acceleration * Time.deltaTime;
+            speed = 1.0f;
 
         // Movement
         Vector3 move = Vector3.zero;
@@ -50,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
         // Run
         if(isRunning)
-            move *= 2;
+            move *= 1.5f;
 
         move += Physics.gravity * 0.5f;
         controller.Move(move * Time.deltaTime * speed);
