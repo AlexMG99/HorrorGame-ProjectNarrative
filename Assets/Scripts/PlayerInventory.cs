@@ -31,7 +31,7 @@ public class PlayerInventory : MonoBehaviour
     IEnumerator RayCast()
     {
         RaycastHit hit;
-        if (Physics.Raycast(GameManager.Instance.GetVirtualCamera().transform.position, GameManager.Instance.GetVirtualCamera().transform.forward, out hit, 100.0f))
+        if (Physics.Raycast(GameManager.Instance.GetVirtualCamera().transform.position, GameManager.Instance.GetVirtualCamera().transform.forward, out hit, 20.0f))
         {
             middlePoint.SetActive(false);
             objectText.text = "";
@@ -50,7 +50,7 @@ public class PlayerInventory : MonoBehaviour
     void PickObject()
     {
         RaycastHit hit;
-        if (Physics.Raycast(GameManager.Instance.GetVirtualCamera().transform.position, GameManager.Instance.GetVirtualCamera().transform.forward, out hit, 100.0f))
+        if (Physics.Raycast(GameManager.Instance.GetVirtualCamera().transform.position, GameManager.Instance.GetVirtualCamera().transform.forward, out hit, 20.0f))
         {
             if (hit.transform.gameObject.CompareTag("Pick"))
             {
