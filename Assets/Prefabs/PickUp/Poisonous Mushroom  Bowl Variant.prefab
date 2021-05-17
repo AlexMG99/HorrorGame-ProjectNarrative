@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!54 &200094505
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9076250246886242464}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1001 &2953729989764777918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.3747
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.38435
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 161.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1882008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1882008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850366238, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1882008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850669854, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_Name
+      value: Poisonous Mushroom  Bowl Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127305915850669854, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 633265996949522202, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+--- !u!1 &9076250246886242464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6127305915850669854, guid: 393fd22a164b5fa4fa56cb306f485f94, type: 3}
+  m_PrefabInstance: {fileID: 2953729989764777918}
+  m_PrefabAsset: {fileID: 0}

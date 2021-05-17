@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
             isCrouched = false;
             animator.SetBool("Crouched", isCrouched);
 
-            GameManager.Instance.ChangeCameraOffset(new Vector3(0, 0, 0));
+            GameManager.Instance.ChangeCameraOffset(new Vector3(0, 0.15f, 0.5f));
         }
 
         // Player Movement

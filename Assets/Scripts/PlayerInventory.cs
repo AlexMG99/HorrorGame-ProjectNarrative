@@ -7,8 +7,10 @@ public class PlayerInventory : MonoBehaviour
 {
     public GameObject middlePoint;
     public Text objectText;
+    public SacrificePuzzle sacrificePuzzle;
 
     List<string> inventory;
+   
 
     // Start is called before the first frame update
     void Awake()
@@ -25,7 +27,7 @@ public class PlayerInventory : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("e"))
-            PickObject();
+            Interact();
     }
 
     IEnumerator RayCast()
@@ -47,7 +49,7 @@ public class PlayerInventory : MonoBehaviour
         StartCoroutine("RayCast");
     }
 
-    void PickObject()
+    void Interact()
     {
         RaycastHit hit;
         if (Physics.Raycast(GameManager.Instance.GetVirtualCamera().transform.position, GameManager.Instance.GetVirtualCamera().transform.forward, out hit, 20.0f))
@@ -58,6 +60,35 @@ public class PlayerInventory : MonoBehaviour
                 Debug.Log("Object: " + inventory[0]);
                 Destroy(hit.transform.gameObject);
             }
+            else if (hit.transform.gameObject.CompareTag("Interactable"))
+            {
+                if (hit.transform.gameObject.name == "Knife")
+                {
+                    string objName = GetInventoryObject("Meat");
+                    if (objName != "No object") 
+                        sacrificePuzzle.AddObjectToBowl(objName);
+                }
+                else if (hit.transform.gameObject.name == "Mortar")
+                {
+                    string objName = GetInventoryObject("Poisonous Mushroom");
+                    if (objName != "No object")
+                        sacrificePuzzle.AddObjectToBowl(objName);
+                }
+            }
         }
+    }
+
+    string GetInventoryObject(string name)
+    {
+        foreach (string obj in inventory)
+        {
+            if (obj == name)
+            {
+                inventory.Remove(obj);
+                return name;
+            }
+        }
+
+        return "No object";
     }
 }
