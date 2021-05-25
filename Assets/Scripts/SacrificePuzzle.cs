@@ -13,6 +13,15 @@ public class SacrificePuzzle : MonoBehaviour
     public GameObject knife;
     public GameObject mortar;
 
+    public GameObject bridgePath;
+    public GameObject cavePath;
+
+    public GameObject bridgeTorch1;
+    public GameObject bridgeTorch2;
+
+    public GameObject caveTorch1;
+    public GameObject caveTorch2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +54,22 @@ public class SacrificePuzzle : MonoBehaviour
             // Explode everything
             // Cinematic
             // Opens one path
+            if (objName == "Meat")
+            {
+                // Activate torches
+                bridgeTorch1.SetActive(true);
+                bridgeTorch2.SetActive(true);
+
+                bridgePath.SetActive(false);
+            }
+            else
+            {
+                // Activate torches
+                caveTorch1.SetActive(true);
+                caveTorch2.SetActive(true);
+
+                cavePath.SetActive(false);
+            }
         }
     }
 
@@ -63,11 +88,8 @@ public class SacrificePuzzle : MonoBehaviour
 
     bool IsFinished()
     {
-
         if (inventory.Count == 4)
-        {
             return true;
-        }
 
         return false;
     }

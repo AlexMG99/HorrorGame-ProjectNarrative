@@ -28,6 +28,16 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetKeyDown("e"))
             Interact();
+        if (Input.GetKeyDown("1"))
+        {
+            inventory.Add("Meat");
+            Debug.Log("Object: " + inventory[inventory.Count - 1]);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            inventory.Add("Poisonous Mushroom");
+            Debug.Log("Object: " + inventory[inventory.Count - 1]);
+        }
     }
 
     IEnumerator RayCast()
@@ -56,8 +66,9 @@ public class PlayerInventory : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Pick"))
             {
+                hit.transform.gameObject.gameObject.GetComponent<Pickable>().OnPickUp();
                 inventory.Add(hit.transform.gameObject.name);
-                Debug.Log("Object: " + inventory[0]);
+                Debug.Log("Object: " + inventory[inventory.Count - 1]);
                 Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.CompareTag("Interactable"))
