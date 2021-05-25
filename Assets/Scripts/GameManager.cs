@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,5 +29,11 @@ public class GameManager : MonoBehaviour
     {
         CinemachineTransposer cinTrans = virtualCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>();
         cinTrans.m_FollowOffset = offset;
+    }
+
+
+    public void ChangeLevel(string newLevel)
+    {
+        EditorSceneManager.LoadScene(newLevel);
     }
 }

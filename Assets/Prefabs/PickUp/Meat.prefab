@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7381757288609018039}
   - component: {fileID: 6213412488357447412}
   - component: {fileID: 8908537993949713958}
+  - component: {fileID: 3691277985629835432}
   m_Layer: 0
   m_Name: Meat
   m_TagString: Pick
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 9039209701750821218}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.82, y: 0.46605223, z: 25.7}
-  m_LocalScale: {x: 1479.2701, y: 1479.2701, z: 1479.2701}
+  m_LocalScale: {x: 1479.2701, y: 1479.27, z: 1479.27}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -114,3 +115,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.00092262845, y: 0.0017875987, z: 0.00018920901}
   m_Center: {x: -0.000009217619, y: -0.0000072231933, z: 0}
+--- !u!114 &3691277985629835432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9039209701750821218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d19322d29d5e554e9e3c8f2803d1fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedTorch: {fileID: 0}
