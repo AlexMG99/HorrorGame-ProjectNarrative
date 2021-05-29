@@ -9,7 +9,12 @@ public class PlayerInventory : MonoBehaviour
     public Text objectText;
     public SacrificePuzzle sacrificePuzzle;
 
+    public Text meatText;
+    public Text mushroomText;
+
     List<string> inventory;
+
+    GameObject inventoryUI;
    
 
     // Start is called before the first frame update
@@ -21,6 +26,9 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         StartCoroutine("RayCast");
+
+        inventoryUI = GameObject.Find("Inventory");
+        inventoryUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,6 +36,8 @@ public class PlayerInventory : MonoBehaviour
     {
         if (Input.GetKeyDown("e"))
             Interact();
+        if (Input.GetKeyDown("i"))
+            inventoryUI.SetActive(!inventoryUI.active);
         if (Input.GetKeyDown("1"))
         {
             inventory.Add("Meat");
@@ -68,7 +78,8 @@ public class PlayerInventory : MonoBehaviour
             {
                 hit.transform.gameObject.gameObject.GetComponent<Pickable>().OnPickUp();
                 inventory.Add(hit.transform.gameObject.name);
-                Debug.Log("Object: " + inventory[inventory.Count - 1]);
+                meatText.text = "x" + GetInventoryCount("Meat");
+                mushroomText.text = "x" + GetInventoryCount("Poisonous Mushroom");
                 Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.CompareTag("Interactable"))
@@ -76,14 +87,20 @@ public class PlayerInventory : MonoBehaviour
                 if (hit.transform.gameObject.name == "Knife")
                 {
                     string objName = GetInventoryObject("Meat");
-                    if (objName != "No object") 
+                    if (objName != "No object")
+                    {
                         sacrificePuzzle.AddObjectToBowl(objName);
+                        meatText.text = "x" + GetInventoryCount("Meat");
+                    }
                 }
                 else if (hit.transform.gameObject.name == "Mortar")
                 {
                     string objName = GetInventoryObject("Poisonous Mushroom");
                     if (objName != "No object")
+                    {
                         sacrificePuzzle.AddObjectToBowl(objName);
+                        mushroomText.text = "x" + GetInventoryCount("Poisonous Mushroom");
+                    }
                 }
             }
         }
@@ -101,5 +118,20 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return "No object";
+    }
+
+    int GetInventoryCount(string name)
+    {
+        int objCount = 0;
+
+        foreach (string obj in inventory)
+        {
+            if (obj == name)
+            {
+                objCount++;
+            }
+        }
+
+        return objCount;
     }
 }

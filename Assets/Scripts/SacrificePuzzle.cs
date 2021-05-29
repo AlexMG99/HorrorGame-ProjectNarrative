@@ -45,6 +45,8 @@ public class SacrificePuzzle : MonoBehaviour
             Debug.Log("No object!");
         }
 
+        gameObject.name = "Bowl (" + inventory.Count + "/4)";
+
         // Despawn other object
         if (inventory.Count == 1)
             DespawnOtherObject(objName);
