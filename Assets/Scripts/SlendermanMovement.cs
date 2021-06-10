@@ -15,7 +15,7 @@ public class SlendermanMovement : MonoBehaviour
 
         GameObject teleportationList = GameObject.Find("Slenderman Teleport");
 
-        int childCount = teleportationList.transform.GetChildCount();
+        int childCount = teleportationList.transform.childCount;
         for (int i = 0; i < childCount; i++)
         {
             teleportPoints.Add(teleportationList.transform.GetChild(i).gameObject);
