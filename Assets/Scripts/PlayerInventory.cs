@@ -15,6 +15,8 @@ public class PlayerInventory : MonoBehaviour
     List<string> inventory;
 
     GameObject inventoryUI;
+
+    bool isPushing = false;
    
 
     // Start is called before the first frame update
@@ -63,11 +65,32 @@ public class PlayerInventory : MonoBehaviour
                 middlePoint.SetActive(true);
                 objectText.text = hit.transform.gameObject.name;
             }
+
+            if (hit.transform.gameObject.CompareTag("Push") && Vector3.Distance(hit.transform.gameObject.transform.position, gameObject.transform.position) < 5.0f)
+            {
+                middlePoint.SetActive(true);
+                objectText.text = hit.transform.gameObject.name;
+            }
         }
 
         yield return new WaitForSeconds(.5f);
         StartCoroutine("RayCast");
     }
+
+    IEnumerator CheckDistance(RaycastHit rock)
+    {
+        while(isPushing && Vector3.Distance(rock.transform.gameObject.transform.position, gameObject.transform.position) < 10.0f)
+        {
+            yield return new WaitForSeconds(.1f);
+        }
+
+        rock.transform.parent = null;
+        ChangePlayerMaxSpeed(5.0f);
+
+        yield return null;
+    }
+
+
 
     void Interact()
     {
@@ -103,7 +126,26 @@ public class PlayerInventory : MonoBehaviour
                     }
                 }
             }
+            if (hit.transform.gameObject.CompareTag("Push") && Vector3.Distance(hit.transform.gameObject.transform.position, gameObject.transform.position) < 5.0f)
+            {
+                if (isPushing)
+                {
+                    isPushing = false;
+                }
+                else
+                {
+                    hit.transform.parent = gameObject.transform;
+                    ChangePlayerMaxSpeed(1.0f);
+                    isPushing = true;
+                    StartCoroutine(CheckDistance(hit));
+                }
+            }
         }
+    }
+
+    void ChangePlayerMaxSpeed(float speed)
+    {
+        GetComponent<PlayerController>().maxSpeed = speed;
     }
 
     string GetInventoryObject(string name)

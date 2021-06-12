@@ -860,6 +860,8 @@ MonoBehaviour:
   middlePoint: {fileID: 0}
   objectText: {fileID: 0}
   sacrificePuzzle: {fileID: 0}
+  meatText: {fileID: 0}
+  mushroomText: {fileID: 0}
 --- !u!81 &6579962
 AudioListener:
   m_ObjectHideFlags: 0
