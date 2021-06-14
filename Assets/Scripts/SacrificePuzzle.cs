@@ -22,6 +22,10 @@ public class SacrificePuzzle : MonoBehaviour
     public GameObject caveTorch1;
     public GameObject caveTorch2;
 
+
+    public GameObject Mush_director;
+    public GameObject Meat_Director;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,18 +63,23 @@ public class SacrificePuzzle : MonoBehaviour
             if (objName == "Meat")
             {
                 // Activate torches
-                bridgeTorch1.SetActive(true);
-                bridgeTorch2.SetActive(true);
+               // bridgeTorch1.SetActive(true);
+                //bridgeTorch2.SetActive(true);
 
                 bridgePath.SetActive(false);
+                Meat_Director.GetComponent<CutsceneDirector>().StartTimeLine();
             }
             else
             {
                 // Activate torches
-                caveTorch1.SetActive(true);
-                caveTorch2.SetActive(true);
+                //caveTorch1.SetActive(true);
+                //caveTorch2.SetActive(true);
 
                 cavePath.SetActive(false);
+                Mush_director.GetComponent<CutsceneDirector>().StartTimeLine();
+                
+
+
             }
         }
     }
