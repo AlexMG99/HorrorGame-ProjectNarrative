@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class SlendermanMovement : MonoBehaviour
 {
-    public GameObject player;
+    public PlayerController player;
     public GameObject jumpScareImage;
     Image jumpScareImageUI;
     AudioSource jumpScareAudioSource;
 
     public float checkDistance = 100.0f;
+    public string lastTeleport = "None";
 
     List<GameObject> teleportPoints;
 
@@ -37,7 +38,6 @@ public class SlendermanMovement : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        Debug.Log(distance);
     }
 
     IEnumerator CheckPlayerDistance()
@@ -48,7 +48,7 @@ public class SlendermanMovement : MonoBehaviour
         {
             transform.position = GetNearestTeleportationPoint();
         }
-        if (checkDistance < 10.0f)
+        else if (distance < 10.0f && !player.isBlind)
         {
             StartCoroutine("JumpScare");
         }
@@ -69,8 +69,34 @@ public class SlendermanMovement : MonoBehaviour
             {
                 distance = newDistance;
                 tPointPosition = tPoint.transform.position;
+                lastTeleport = tPoint.name;
             }
         }
+
+        return tPointPosition;
+    }
+
+    Vector3 GetNearestNewTeleportationPoint()
+    {
+        float distance = 999999.0f;
+        string pointName = lastTeleport;
+        Vector3 tPointPosition = Vector3.zero;
+
+        foreach (GameObject tPoint in teleportPoints)
+        {
+            if (lastTeleport != tPoint.name)
+            {
+                float newDistance = Vector3.Distance(transform.position, tPoint.transform.position);
+                if (newDistance < distance)
+                {
+                    distance = newDistance;
+                    tPointPosition = tPoint.transform.position;
+                    pointName = tPoint.name;
+                }
+            }
+        }
+
+        lastTeleport = pointName;
 
         return tPointPosition;
     }
@@ -79,11 +105,12 @@ public class SlendermanMovement : MonoBehaviour
     {
         jumpScareImage.SetActive(true);
         jumpScareAudioSource.Play();
-        Debug.LogError("Ha entrado");
+
+        transform.position = GetNearestNewTeleportationPoint();
 
         while (jumpScareAudioSource.isPlaying)
         {
-            float randCol = Random.RandomRange(0.1f, 1.0f);
+            float randCol = Random.Range(0.1f, 1.0f);
             jumpScareImageUI.color = new Color(randCol, randCol, randCol);
 
             yield return new WaitForSeconds(0.1f);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 
@@ -11,8 +12,11 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 5.0f;
     public float camMovSpeed = 5.0f;
 
+    public Image blinkImage;
+
     bool isRunning = false;
     bool isCrouched = false;
+    public bool isBlind = false;
 
     CharacterController controller;
     Animator animator;
@@ -31,6 +35,11 @@ public class PlayerController : MonoBehaviour
             isRunning = true;
         else if (Input.GetKeyUp(KeyCode.LeftShift))
             isRunning = false;
+        else if (Input.GetKey(KeyCode.Space))
+            CloseEyes();
+        else if (Input.GetKeyUp(KeyCode.Space))
+            StartCoroutine("OpenEyes");
+
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -52,6 +61,43 @@ public class PlayerController : MonoBehaviour
 
         // Animations
         animator.SetFloat("Speed", Input.GetAxis("Vertical"));
+    }
+
+    void CloseEyes()
+    {
+        if (blinkImage.color.a < 1.0)
+        {
+            Color newCol = blinkImage.color;
+            newCol.a += 2.5f * Time.deltaTime;
+            blinkImage.color = newCol;
+
+            if (blinkImage.color.a >= 0.9f)
+                isBlind = true;
+        }
+    }
+
+    IEnumerator OpenEyes()
+    {
+        while (blinkImage.color.a > 0.0)
+        { 
+            Color newCol = blinkImage.color;
+            newCol.a -= 2.5f * Time.deltaTime;
+            blinkImage.color = newCol;
+
+            if (blinkImage.color.a < 0.1f)
+                isBlind = false;
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                newCol = blinkImage.color;
+                newCol.a = 0.0f;
+                blinkImage.color = newCol;
+                isBlind = false;
+
+                StopCoroutine("OpenEyes");
+            }
+
+            yield return null;
+        }
     }
 
     // Player Movement Input
