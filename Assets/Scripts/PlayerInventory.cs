@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerInventory : MonoBehaviour
 
     public Text meatText;
     public Text mushroomText;
+    public Text woodText;
 
     List<string> inventory;
 
@@ -99,10 +101,17 @@ public class PlayerInventory : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Pick"))
             {
-                hit.transform.gameObject.gameObject.GetComponent<Pickable>().OnPickUp();
                 inventory.Add(hit.transform.gameObject.name);
-                meatText.text = "x" + GetInventoryCount("Meat");
-                mushroomText.text = "x" + GetInventoryCount("Poisonous Mushroom");
+                if (SceneManager.GetActiveScene().name == "Level_1")
+                {
+                    hit.transform.gameObject.gameObject.GetComponent<Pickable>().OnPickUp();
+                    meatText.text = "x" + GetInventoryCount("Meat");
+                    mushroomText.text = "x" + GetInventoryCount("Poisonous Mushroom");
+                }
+                else if (SceneManager.GetActiveScene().name == "Level_2.2")
+                {
+                    woodText.text = "x" + GetInventoryCount("Wood Plank");
+                }
                 Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.CompareTag("Interactable"))
@@ -123,6 +132,15 @@ public class PlayerInventory : MonoBehaviour
                     {
                         sacrificePuzzle.AddObjectToBowl(objName);
                         mushroomText.text = "x" + GetInventoryCount("Poisonous Mushroom");
+                    }
+                }
+                else if (hit.transform.gameObject.name.Contains("Wood Plank"))
+                {
+                    string objName = GetInventoryObject("Wood Plank");
+                    if (objName != "No object")
+                    {
+                        hit.transform.gameObject.GetComponent<PlankPuzzle>().AddWoodPlank();
+                        woodText.text = "x" + GetInventoryCount("Meat");
                     }
                 }
             }
