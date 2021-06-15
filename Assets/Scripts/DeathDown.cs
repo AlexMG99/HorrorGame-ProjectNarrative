@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class DeathDown : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class DeathDown : MonoBehaviour
     {
         if(hit.gameObject.CompareTag("Player"))
         {
-            EditorSceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(sceneName);
         }
     }
 }

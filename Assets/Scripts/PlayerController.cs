@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
             CloseEyes();
         else if (Input.GetKeyUp(KeyCode.Space))
             StartCoroutine("OpenEyes");
+        else if (Input.GetKeyUp(KeyCode.Escape))
+            Application.Quit();
 
 
         if (Input.GetKeyDown(KeyCode.LeftControl))

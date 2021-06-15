@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +34,6 @@ public class GameManager : MonoBehaviour
 
     public void ChangeLevel(string newLevel)
     {
-        EditorSceneManager.LoadScene(newLevel);
+        SceneManager.LoadScene(newLevel);
     }
 }
